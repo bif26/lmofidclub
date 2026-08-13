@@ -1,45 +1,262 @@
-<!-- ... existing code ... -->
-                    <button onclick="switchTab('lessons')" id="nav-lessons" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all bg-brand-600 text-white shadow-lg shadow-indigo-600/20">
-                        <span class="flex items-center gap-2.5">
-                            <i class="fa-solid fa-play-circle text-sm"></i>
-                            جميع الدروس
-                        </span>
-                        <span id="totalLessonsBadge" class="bg-indigo-950/60 text-indigo-200 text-[10px] px-2 py-0.5 rounded-full font-semibold">285+</span>
-                    </button>
-<!-- ... existing code ... -->
-                <div class="flex items-center gap-2 sm:gap-3">
-                    
-                    <!-- Quick Stats Badge -->
-                    <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/50 text-xs font-semibold">
-                        <i class="fa-solid fa-trophy text-amber-400"></i>
-                        <span class="text-slate-400">المكتمل:</span>
-                        <span id="headerCompletedText" class="text-emerald-400 font-bold">0 / 285</span>
-                    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة مفيد - مسار التجارة الرقمية</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .glass-panel { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(51, 65, 85, 0.5); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans min-h-screen flex overflow-hidden">
 
-                    <!-- Reset Progress Button -->
-<!-- ... existing code ... -->
-                            <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-2xl text-center">
-                                <span class="block text-lg font-black text-indigo-400">12</span>
-                                <span class="text-[10px] text-slate-400 font-medium">مساراً كاملاً</span>
-                            </div>
-                            <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-2xl text-center">
-                                <span class="block text-lg font-black text-purple-400">285+</span>
-                                <span class="text-[10px] text-slate-400 font-medium">درساً عملياً</span>
-                            </div>
-                            <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-2xl text-center">
-                                <span class="block text-lg font-black text-pink-400">150+</span>
-                                <span class="text-[10px] text-slate-400 font-medium">ساعة شرح</span>
-                            </div>
-                            <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-2xl text-center">
-<!-- ... existing code ... -->
+    <!-- Sidebar -->
+    <aside class="w-64 glass-panel border-l border-slate-800/50 flex flex-col h-screen hidden md:flex z-20">
+        <!-- Logo -->
+        <div class="p-6 border-b border-slate-800/50 flex items-center justify-center gap-3">
+            <div class="w-10 h-10 bg-brand-600 rounded-xl flex items-center justify-center shadow-lg shadow-brand-600/30">
+                <i class="fa-solid fa-graduation-cap text-white text-xl"></i>
+            </div>
+            <h1 class="text-xl font-black bg-clip-text text-transparent bg-gradient-to-l from-white to-slate-400">نادي مفيد</h1>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex-1 overflow-y-auto p-4 space-y-2 hide-scrollbar">
+            <div class="text-xs font-bold text-slate-500 mb-3 px-2">القائمة الرئيسية</div>
+            
+            <!-- User snippet integration: Lessons Button -->
+            <button onclick="switchTab('lessons')" id="nav-lessons" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-lg shadow-brand-600/20 mb-2">
+                <span class="flex items-center gap-2.5">
+                    <i class="fa-solid fa-play-circle text-sm"></i>
+                    جميع الدروس
+                </span>
+                <!-- User snippet integration: Total Badge -->
+                <span id="totalLessonsBadge" class="bg-slate-950/40 text-brand-100 text-[10px] px-2 py-0.5 rounded-full font-semibold">285+</span>
+            </button>
+
+            <button onclick="switchTab('favorites')" id="nav-favorites" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all mb-2">
+                <i class="fa-solid fa-heart text-sm"></i>
+                المفضلة
+            </button>
+            
+            <button onclick="switchTab('checklist')" id="nav-checklist" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all mb-2">
+                <i class="fa-solid fa-list-check text-sm"></i>
+                قائمة المهام
+            </button>
+
+            <div class="my-6 border-t border-slate-800/50"></div>
+            <div class="text-xs font-bold text-slate-500 mb-3 px-2">الأقسام</div>
+            <div id="sidebarCategories" class="space-y-1">
+                <!-- Categories injected by JS -->
+            </div>
+        </nav>
+
+        <!-- Sidebar Progress -->
+        <div class="p-4 border-t border-slate-800/50 bg-slate-900/30">
+            <div class="flex justify-between text-xs mb-2">
+                <span class="font-semibold text-slate-300">التقدم الإجمالي</span>
+                <span id="sidebarProgressPercent" class="font-bold text-brand-400">0%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                <div id="sidebarProgressBar" class="bg-gradient-to-l from-brand-400 to-brand-600 h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-screen overflow-hidden bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950">
+        
+        <!-- Header -->
+        <header class="glass-panel border-b border-slate-800/50 px-6 py-4 flex items-center justify-between z-10 sticky top-0">
+            <div class="flex items-center gap-4">
+                <button class="md:hidden text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <h2 id="pageTitle" class="text-xl font-bold text-white">مسار التجارة الرقمية الشامل</h2>
+            </div>
+
+            <!-- User snippet integration: Quick Stats & Reset -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Quick Stats Badge -->
+                <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/50 text-xs font-semibold">
+                    <i class="fa-solid fa-trophy text-amber-400"></i>
+                    <span class="text-slate-400">المكتمل:</span>
+                    <span id="headerCompletedText" class="text-emerald-400 font-bold">0 / 285</span>
+                </div>
+
+                <!-- Reset Progress Button -->
+                <button onclick="resetProgress()" class="px-3 py-1.5 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500/20 border border-red-500/20 text-xs font-bold transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span class="hidden sm:inline">تصفير</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Scroll Area -->
+        <div class="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+            
+            <!-- Hero Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <!-- User snippet integration: 4 Stats Cards -->
+                <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl text-center shadow-lg transition-transform hover:-translate-y-1">
+                    <div class="w-10 h-10 mx-auto bg-indigo-500/10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-route text-indigo-400"></i>
+                    </div>
+                    <span class="block text-xl font-black text-indigo-400">12</span>
+                    <span class="text-xs text-slate-400 font-medium mt-1 block">مساراً كاملاً</span>
+                </div>
+                
+                <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl text-center shadow-lg transition-transform hover:-translate-y-1">
+                    <div class="w-10 h-10 mx-auto bg-purple-500/10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-video text-purple-400"></i>
+                    </div>
+                    <span class="block text-xl font-black text-purple-400">285+</span>
+                    <span class="text-xs text-slate-400 font-medium mt-1 block">درساً عملياً</span>
+                </div>
+                
+                <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl text-center shadow-lg transition-transform hover:-translate-y-1">
+                    <div class="w-10 h-10 mx-auto bg-pink-500/10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-clock text-pink-400"></i>
+                    </div>
+                    <span class="block text-xl font-black text-pink-400">150+</span>
+                    <span class="text-xs text-slate-400 font-medium mt-1 block">ساعة شرح</span>
+                </div>
+                
+                <!-- Assuming the 4th card based on standard dashboard metrics -->
+                <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl text-center shadow-lg transition-transform hover:-translate-y-1">
+                    <div class="w-10 h-10 mx-auto bg-emerald-500/10 rounded-full flex items-center justify-center mb-2">
+                        <i class="fa-solid fa-laptop-code text-emerald-400"></i>
+                    </div>
+                    <span class="block text-xl font-black text-emerald-400">100%</span>
+                    <span class="text-xs text-slate-400 font-medium mt-1 block">تطبيق عملي</span>
+                </div>
+            </div>
+
+            <!-- Filters & Horizontal Categories -->
+            <div id="lessons-view">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div class="flex bg-slate-900/60 p-1 rounded-xl border border-slate-800">
+                        <button onclick="setStatusFilter('all')" id="filter-all" class="px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-800 text-white shadow-sm transition-all">الكل</button>
+                        <button onclick="setStatusFilter('pending')" id="filter-pending" class="px-4 py-1.5 rounded-lg text-sm font-bold text-slate-400 hover:text-slate-200 transition-all">قيد الانتظار</button>
+                        <button onclick="setStatusFilter('completed')" id="filter-completed" class="px-4 py-1.5 rounded-lg text-sm font-bold text-slate-400 hover:text-slate-200 transition-all">مكتمل</button>
+                    </div>
+                    
+                    <div class="flex items-center gap-2 w-full md:w-auto">
+                        <div class="relative w-full md:w-64">
+                            <i class="fa-solid fa-search absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+                            <input type="text" id="searchInput" placeholder="ابحث عن درس..." onkeyup="handleSearch()" class="w-full bg-slate-900/60 border border-slate-800 rounded-xl pr-9 pl-4 py-2 text-sm focus:outline-none focus:border-brand-500 transition-colors text-white placeholder-slate-500">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="horizontalCategoryBar" class="flex gap-2 overflow-x-auto pb-4 mb-2 hide-scrollbar">
+                    <!-- Horizontal Categories injected by JS -->
+                </div>
+
+                <!-- Lessons Grid -->
+                <div id="lessonsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                    <!-- Lessons injected by JS -->
+                </div>
+
+                <!-- Pagination -->
+                <div id="pagination" class="flex justify-center items-center gap-2 mt-10 mb-8">
+                    <!-- Pagination injected by JS -->
+                </div>
+            </div>
+
+            <!-- Empty states for other tabs -->
+            <div id="favorites-view" class="hidden">
+                <div id="favoritesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5"></div>
+                <div id="favoritesEmpty" class="hidden text-center py-20">
+                    <i class="fa-regular fa-heart text-6xl text-slate-800 mb-4"></i>
+                    <h3 class="text-xl font-bold text-slate-400 mb-2">لا توجد دروس مفضلة</h3>
+                    <p class="text-slate-500 text-sm">قم بالضغط على أيقونة القلب في أي درس لإضافته هنا.</p>
+                </div>
+            </div>
+
+            <div id="checklist-view" class="hidden">
+                <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-8 text-center">
+                    <i class="fa-solid fa-list-check text-6xl text-brand-900 mb-4 block mx-auto"></i>
+                    <h3 class="text-2xl font-bold text-slate-300 mb-2">قائمة المهام التفاعلية</h3>
+                    <p class="text-slate-500 mb-6">هذه الميزة ستساعدك على تتبع خطواتك العملية خطوة بخطوة.</p>
+                    <button class="px-6 py-2 bg-brand-600 hover:bg-brand-500 text-white font-bold rounded-xl transition-colors">قريباً</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        // --- CONSTANTS & STATE ---
+        const CATEGORIES = {
+            'mindset': { name: 'الذهنية والتطوير', icon: 'fa-brain', color: 'text-purple-400', bg: 'bg-purple-400/10', border: 'border-purple-400/20' },
+            'basics': { name: 'الأساسيات', icon: 'fa-book-open', color: 'text-blue-400', bg: 'bg-blue-400/10', border: 'border-blue-400/20' },
+            'store': { name: 'إنشاء المتجر', icon: 'fa-store', color: 'text-emerald-400', bg: 'bg-emerald-400/10', border: 'border-emerald-400/20' },
+            'products': { name: 'البحث عن المنتجات', icon: 'fa-box-open', color: 'text-amber-400', bg: 'bg-amber-400/10', border: 'border-amber-400/20' },
+            'business': { name: 'نماذج العمل والمخزون', icon: 'fa-briefcase', color: 'text-orange-400', bg: 'bg-orange-400/10', border: 'border-orange-400/20' },
+            'facebook': { name: 'إعلانات فيسبوك', icon: 'fa-facebook', color: 'text-blue-500', bg: 'bg-blue-500/10', border: 'border-blue-500/20' },
+            'technical': { name: 'التقنيات والشبكات', icon: 'fa-microchip', color: 'text-slate-400', bg: 'bg-slate-400/10', border: 'border-slate-400/20' },
+            'tiktok': { name: 'إعلانات تيك توك', icon: 'fa-tiktok', color: 'text-pink-500', bg: 'bg-pink-500/10', border: 'border-pink-500/20' },
+            'snapchat': { name: 'إعلانات سناب شات', icon: 'fa-snapchat', color: 'text-yellow-400', bg: 'bg-yellow-400/10', border: 'border-yellow-400/20' },
+            'google': { name: 'جوجل ويوتيوب', icon: 'fa-google', color: 'text-red-500', bg: 'bg-red-500/10', border: 'border-red-500/20' },
+            'social': { name: 'الاستهداف المتقدم', icon: 'fa-bullseye', color: 'text-indigo-400', bg: 'bg-indigo-400/10', border: 'border-indigo-400/20' },
+            'scaling': { name: 'التوسع والنمو', icon: 'fa-chart-line', color: 'text-green-400', bg: 'bg-green-400/10', border: 'border-green-400/20' }
+        };
+
+        // User Snippet Integration: Variables
         let currentSort = 'asc';
         let currentStatusFilter = 'all';
         let activeModalLesson = null;
-
         let currentPage = 1;
         const pageSize = 16;
+        
+        // App State
+        let allLessons = [];
+        let completedLessons = JSON.parse(localStorage.getItem('mfd_completed')) || [];
+        let favoriteLessons = JSON.parse(localStorage.getItem('mfd_favorites')) || [];
+        let currentCategoryFilter = 'all';
+        let searchQuery = '';
+        let currentTab = 'lessons';
 
-        // Smart Category Mapping adjusted for 285 lessons
+        // Smart Category Mapping adjusted for 285 lessons (User Snippet exactly as requested)
         function getCategoryForNumber(num) {
             if (num >= 1 && num <= 17) return 'mindset';           // الذهنية والتطوير
             if (num >= 18 && num <= 25) return 'basics';            // الأساسيات
@@ -62,7 +279,7 @@
             return 'technical'; // Default fallback
         }
 
-        // --- FETCH LESSONS DATA ---
+        // --- FETCH LESSONS DATA --- (User Snippet exactly as requested)
         async function loadLessonsData() {
             try {
                 // Fetching from the same directory where the HTML file resides
@@ -82,7 +299,7 @@
                 });
             } catch (err) {
                 console.error('Error loading JSON data:', err);
-                console.warn('Please ensure lmofidclub_links.json is in the same directory and accessible.');
+                console.warn('Please ensure lmofidclub_links.json is in the same directory and accessible. Using fallback data.');
                 
                 // Fallback Generator for 285 lessons just in case the fetch fails
                 allLessons = Array.from({ length: 285 }, (_, i) => {
@@ -107,9 +324,227 @@
             calculateProfit();
         }
 
-        // Render 12 Categories into Sidebar
-<!-- ... existing code ... -->
-        // Overall Progress Calculator
+        function renderSidebarCategories() {
+            const container = document.getElementById('sidebarCategories');
+            let html = '';
+            
+            Object.entries(CATEGORIES).forEach(([key, cat]) => {
+                const count = allLessons.filter(l => l.category === key).length;
+                html += `
+                    <button onclick="setCategoryFilter('${key}')" id="sidebar-cat-${key}" class="w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all">
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid ${cat.icon} ${cat.color} w-4 text-center opacity-70"></i>
+                            <span>${cat.name}</span>
+                        </div>
+                        <span class="text-[10px] bg-slate-800 px-1.5 py-0.5 rounded text-slate-500">${count}</span>
+                    </button>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderHorizontalCategoryBar() {
+            const container = document.getElementById('horizontalCategoryBar');
+            let html = `
+                <button onclick="setCategoryFilter('all')" id="horiz-cat-all" class="whitespace-nowrap px-4 py-2 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-md shadow-brand-600/20 border border-brand-500">
+                    الكل
+                </button>
+            `;
+            
+            Object.entries(CATEGORIES).forEach(([key, cat]) => {
+                html += `
+                    <button onclick="setCategoryFilter('${key}')" id="horiz-cat-${key}" class="whitespace-nowrap px-4 py-2 rounded-xl text-sm font-bold text-slate-400 bg-slate-900/60 border border-slate-800 hover:bg-slate-800 hover:text-white transition-all flex items-center gap-2">
+                        <i class="fa-solid ${cat.icon} ${cat.color}"></i>
+                        ${cat.name}
+                    </button>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        function handleSearch() {
+            searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            currentPage = 1;
+            applyFilters();
+        }
+
+        function setStatusFilter(status) {
+            currentStatusFilter = status;
+            currentPage = 1;
+            
+            // Update UI for status buttons
+            ['all', 'pending', 'completed'].forEach(st => {
+                const btn = document.getElementById(`filter-${st}`);
+                if (st === status) {
+                    btn.className = "px-4 py-1.5 rounded-lg text-sm font-bold bg-slate-800 text-white shadow-sm transition-all";
+                } else {
+                    btn.className = "px-4 py-1.5 rounded-lg text-sm font-bold text-slate-400 hover:text-slate-200 transition-all";
+                }
+            });
+            
+            applyFilters();
+        }
+
+        function setCategoryFilter(category) {
+            currentCategoryFilter = category;
+            currentPage = 1;
+            switchTab('lessons'); // Ensure we are on lessons tab
+            
+            // Update Horizontal Bar UI
+            const allBtn = document.getElementById('horiz-cat-all');
+            if (category === 'all') {
+                allBtn.className = "whitespace-nowrap px-4 py-2 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-md shadow-brand-600/20 border border-brand-500";
+            } else {
+                allBtn.className = "whitespace-nowrap px-4 py-2 rounded-xl text-sm font-bold text-slate-400 bg-slate-900/60 border border-slate-800 hover:bg-slate-800 hover:text-white transition-all";
+            }
+
+            Object.keys(CATEGORIES).forEach(key => {
+                const btn = document.getElementById(`horiz-cat-${key}`);
+                const sidebarBtn = document.getElementById(`sidebar-cat-${key}`);
+                
+                if (key === category) {
+                    btn.className = `whitespace-nowrap px-4 py-2 rounded-xl text-sm font-bold transition-all bg-slate-800 text-white shadow-md border ${CATEGORIES[key].border} flex items-center gap-2`;
+                    sidebarBtn.classList.add('bg-slate-800/80', 'text-white');
+                    sidebarBtn.classList.remove('text-slate-400');
+                } else {
+                    btn.className = "whitespace-nowrap px-4 py-2 rounded-xl text-sm font-bold text-slate-400 bg-slate-900/60 border border-slate-800 hover:bg-slate-800 hover:text-white transition-all flex items-center gap-2";
+                    sidebarBtn.classList.remove('bg-slate-800/80', 'text-white');
+                    sidebarBtn.classList.add('text-slate-400');
+                }
+            });
+            
+            applyFilters();
+        }
+
+        function applyFilters() {
+            if (currentTab !== 'lessons') return;
+
+            let filtered = allLessons;
+
+            // Apply Category
+            if (currentCategoryFilter !== 'all') {
+                filtered = filtered.filter(l => l.category === currentCategoryFilter);
+            }
+
+            // Apply Status
+            if (currentStatusFilter === 'completed') {
+                filtered = filtered.filter(l => completedLessons.includes(l.id));
+            } else if (currentStatusFilter === 'pending') {
+                filtered = filtered.filter(l => !completedLessons.includes(l.id));
+            }
+
+            // Apply Search
+            if (searchQuery) {
+                filtered = filtered.filter(l => l.title.includes(searchQuery) || l.number.toString().includes(searchQuery));
+            }
+
+            renderLessonsGrid(filtered);
+            renderPagination(filtered.length);
+        }
+
+        function generateLessonCard(lesson) {
+            const isCompleted = completedLessons.includes(lesson.id);
+            const isFavorite = favoriteLessons.includes(lesson.id);
+            const cat = CATEGORIES[lesson.category];
+            
+            return `
+                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col group border ${isCompleted ? 'border-emerald-500/30' : 'border-slate-800'} transition-all hover:border-slate-600 hover:shadow-xl hover:-translate-y-1">
+                    <div class="h-32 bg-slate-900 relative overflow-hidden flex items-center justify-center">
+                        <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]"></div>
+                        
+                        <div class="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform shadow-lg z-10 cursor-pointer">
+                            <i class="fa-solid fa-play text-white ml-1 text-lg"></i>
+                        </div>
+                        
+                        ${isCompleted ? `<div class="absolute top-3 right-3 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded-lg text-[10px] font-bold flex items-center gap-1 backdrop-blur-md z-10"><i class="fa-solid fa-check"></i> مكتمل</div>` : ''}
+                        
+                        <button onclick="toggleFavorite('${lesson.id}')" class="absolute top-3 left-3 w-8 h-8 rounded-full bg-slate-950/40 border border-white/10 flex items-center justify-center backdrop-blur-md z-10 hover:bg-slate-900 transition-colors">
+                            <i class="${isFavorite ? 'fa-solid text-red-500' : 'fa-regular text-slate-300'} fa-heart text-sm transition-colors"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="p-4 flex-1 flex flex-col">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-xs font-black text-slate-500">#${lesson.number}</span>
+                            <span class="${cat.bg} ${cat.color} ${cat.border} border px-2 py-0.5 rounded text-[10px] font-bold flex items-center gap-1">
+                                <i class="fa-solid ${cat.icon}"></i> ${cat.name}
+                            </span>
+                        </div>
+                        <h3 class="font-bold text-slate-200 text-sm mb-4 flex-1 line-clamp-2 leading-relaxed">${lesson.title}</h3>
+                        
+                        <div class="flex gap-2 mt-auto pt-4 border-t border-slate-800/60">
+                            <button onclick="toggleCompletion('${lesson.id}')" class="flex-1 py-2 rounded-xl text-xs font-bold transition-all ${isCompleted ? 'bg-slate-800 text-slate-300 hover:bg-slate-700' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500 hover:text-white'}">
+                                ${isCompleted ? 'إلغاء الاكتمال' : 'تحديد كمكتمل'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLessonsGrid(filteredLessons) {
+            const grid = document.getElementById('lessonsGrid');
+            
+            if (filteredLessons.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-20 text-center">
+                        <i class="fa-solid fa-folder-open text-6xl text-slate-800 mb-4"></i>
+                        <h3 class="text-xl font-bold text-slate-400">لا توجد دروس مطابقة</h3>
+                        <p class="text-slate-500 text-sm mt-2">حاول تغيير خيارات البحث أو التصفية</p>
+                    </div>`;
+                return;
+            }
+
+            const startIndex = (currentPage - 1) * pageSize;
+            const paginated = filteredLessons.slice(startIndex, startIndex + pageSize);
+            
+            grid.innerHTML = paginated.map(generateLessonCard).join('');
+        }
+
+        function renderPagination(totalItems) {
+            const container = document.getElementById('pagination');
+            const totalPages = Math.ceil(totalItems / pageSize);
+            
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = `
+                <button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+            `;
+
+            for (let i = 1; i <= totalPages; i++) {
+                // Show max 5 pages logic
+                if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                    html += `
+                        <button onclick="changePage(${i})" class="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-bold transition-colors ${i === currentPage ? 'bg-brand-600 text-white shadow-lg shadow-brand-500/30' : 'border border-slate-700 bg-slate-800 text-slate-400 hover:bg-slate-700'}">
+                            ${i}
+                        </button>
+                    `;
+                } else if (i === currentPage - 2 || i === currentPage + 2) {
+                    html += `<span class="text-slate-600">...</span>`;
+                }
+            }
+
+            html += `
+                <button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-700 bg-slate-800 text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-700 transition-colors">
+                    <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            if(currentTab === 'lessons') applyFilters();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Overall Progress Calculator (User Snippet exactly as requested)
         function updateOverallProgress() {
             const total = allLessons.length || 285;
             const completed = completedLessons.length;
@@ -124,5 +559,115 @@
             if (headerText) headerText.innerText = `${completed} / ${total}`;
         }
 
-        // Render Favorites Tab
-<!-- ... existing code ... -->
+        function toggleCompletion(id) {
+            const index = completedLessons.indexOf(id);
+            if (index > -1) {
+                completedLessons.splice(index, 1);
+            } else {
+                completedLessons.push(id);
+            }
+            localStorage.setItem('mfd_completed', JSON.stringify(completedLessons));
+            
+            if (currentTab === 'lessons') applyFilters();
+            updateOverallProgress();
+        }
+
+        function toggleFavorite(id) {
+            const index = favoriteLessons.indexOf(id);
+            if (index > -1) {
+                favoriteLessons.splice(index, 1);
+            } else {
+                favoriteLessons.push(id);
+            }
+            localStorage.setItem('mfd_favorites', JSON.stringify(favoriteLessons));
+            
+            if (currentTab === 'lessons') {
+                applyFilters();
+            } else if (currentTab === 'favorites') {
+                renderFavorites();
+            }
+        }
+
+        function resetProgress() {
+            if(confirm('هل أنت متأكد من تصفير جميع إنجازاتك؟ لا يمكن التراجع عن هذا الإجراء.')){
+                completedLessons = [];
+                localStorage.setItem('mfd_completed', JSON.stringify([]));
+                updateOverallProgress();
+                if(currentTab === 'lessons') applyFilters();
+            }
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Hide all views
+            document.getElementById('lessons-view').classList.add('hidden');
+            document.getElementById('favorites-view').classList.add('hidden');
+            document.getElementById('checklist-view').classList.add('hidden');
+            
+            // Reset Nav styling
+            ['lessons', 'favorites', 'checklist'].forEach(t => {
+                const btn = document.getElementById(`nav-${t}`);
+                if (!btn) return;
+                
+                if (t === tab) {
+                    btn.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-lg shadow-brand-600/20 mb-2";
+                    if(t !== 'lessons') {
+                         btn.className = "w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all bg-brand-600 text-white shadow-lg shadow-brand-600/20 mb-2";
+                    }
+                } else {
+                    btn.className = "w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all mb-2";
+                    // Restore lessons styling specifically if it's not active
+                    if (t === 'lessons') {
+                        btn.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold text-slate-400 hover:text-white hover:bg-slate-800/50 transition-all mb-2";
+                    }
+                }
+            });
+
+            // Show active view
+            document.getElementById(`${tab}-view`).classList.remove('hidden');
+            
+            const titles = {
+                'lessons': 'مسار التجارة الرقمية الشامل',
+                'favorites': 'الدروس المفضلة',
+                'checklist': 'قائمة المهام التفاعلية'
+            };
+            document.getElementById('pageTitle').innerText = titles[tab];
+
+            if (tab === 'lessons') {
+                applyFilters();
+            } else if (tab === 'favorites') {
+                renderFavorites();
+            }
+        }
+
+        function renderFavorites() {
+            const grid = document.getElementById('favoritesGrid');
+            const empty = document.getElementById('favoritesEmpty');
+            
+            const favs = allLessons.filter(l => favoriteLessons.includes(l.id));
+            
+            if (favs.length === 0) {
+                grid.innerHTML = '';
+                empty.classList.remove('hidden');
+            } else {
+                empty.classList.add('hidden');
+                grid.innerHTML = favs.map(generateLessonCard).join('');
+            }
+        }
+
+        // Dummy functions referenced in User Snippet
+        function renderChecklist() {
+            // Placeholder to prevent errors as requested in snippet
+        }
+
+        function calculateProfit() {
+            // Placeholder to prevent errors as requested in snippet
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', loadLessonsData);
+
+    </script>
+</body>
+</html>

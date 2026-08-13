@@ -1,45 +1,681 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>دورة المفيد</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="دورة المفيد - كورس التجارة الإلكترونية الشامل من سيمو لايف وأنس">
+    <meta name="keywords" content="دورة المفيد, التجارة الإلكترونية, إعلانات فيسبوك, متاجر إلكترونية">
+    <meta name="author" content="Simo Life & Anas">
+    <title>دورة المفيد - Lmofid Club E-Commerce Course</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --card-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --border-color: #334155;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Cairo', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1a1f35 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.3);
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .header-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        nav button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        nav button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        nav button.active {
+            background: var(--accent-color);
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Stats Section */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+        }
+
+        /* Search & Filter */
+        .search-bar {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-bar input {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .search-bar select {
+            padding: 12px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+
+        /* Lessons Container */
+        .lessons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .lesson-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .lesson-number {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 15px;
+            font-weight: 800;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .lesson-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lesson-title {
+            font-size: 1.05em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .lesson-category {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .lesson-watch {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .lesson-watch:hover {
+            background: var(--secondary-color);
+            transform: translateX(-5px);
+        }
+
+        /* Loading & Empty State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 1.1em;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: 12px;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+            margin-top: 50px;
+            color: var(--text-secondary);
+        }
+
+        .footer-content {
+            margin-bottom: 20px;
+        }
+
+        .footer-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-credits {
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .header-meta {
+                gap: 15px;
+            }
+
+            .lessons-container {
+                grid-template-columns: 1fr;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .search-bar input {
+                width: 100%;
+            }
+
+            nav {
+                gap: 10px;
+            }
+
+            nav button {
+                flex: 1;
+                min-width: 120px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lesson-card {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Spinner */
+        .spinner {
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-  <div id="links-container">
-    <!-- Links will be dynamically inserted here -->
-  </div>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🎓 دورة المفيد</h1>
+            <p>Lmofid Club E-Commerce Training Course</p>
+            <p style="font-size: 0.95em; opacity: 0.9;">دورة تدريبية شاملة في التجارة الإلكترونية من سيمو لايف وأنس</p>
+            <div class="header-meta">
+                <div class="meta-item">
+                    <span>📚</span>
+                    <span>200+ درس</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>100+ ساعة</span>
+                </div>
+                <div class="meta-item">
+                    <span>🌟</span>
+                    <span>مستوى مبتدئ إلى متقدم</span>
+                </div>
+            </div>
+        </header>
 
-  <script>
-    // Function to fetch JSON data and display links
-    async function fetchAndDisplayLinks() {
-      try {
-        const response = await fetch('https://raw.githubusercontent.com/exstoner/lmofidclub/main/lmofidclub_links.json');
-        const data = await response.json();
+        <!-- Stats -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">عدد الدروس</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">11</div>
+                <div class="stat-label">أقسام رئيسية</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">ساعات محتوى</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">إمكانيات النمو</div>
+            </div>
+        </div>
 
-        const linksContainer = document.getElementById('links-container');
-        if (Array.isArray(data)) {
-          const ul = document.createElement('ul');
+        <!-- Navigation -->
+        <nav>
+            <button class="nav-btn active" data-category="all">جميع الدروس</button>
+            <button class="nav-btn" data-category="mindset">الذهنية والتطوير</button>
+            <button class="nav-btn" data-category="basics">الأساسيات</button>
+            <button class="nav-btn" data-category="store">إنشاء المتجر</button>
+            <button class="nav-btn" data-category="products">البحث عن المنتجات</button>
+            <button class="nav-btn" data-category="facebook">إعلانات فيسبوك</button>
+            <button class="nav-btn" data-category="social">وسائل التواصل</button>
+            <button class="nav-btn" data-category="scaling">التوسع والنمو</button>
+        </nav>
 
-          data.forEach(item => {
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = item.url;
-            a.target = '_blank';
-            a.textContent = item.title;
-            li.appendChild(a);
-            ul.appendChild(li);
-          });
+        <!-- Search & Filter -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="ابحث عن درس..." />
+            <select id="sortSelect">
+                <option value="number-asc">رقم الدرس (تصاعدي)</option>
+                <option value="number-desc">رقم الدرس (تنازلي)</option>
+                <option value="title">اسم الدرس</option>
+            </select>
+        </div>
 
-          linksContainer.appendChild(ul);
+        <!-- Lessons Container -->
+        <div class="lessons-container" id="lessonsContainer">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>جارٍ تحميل الدروس...</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <h3>🎓 دورة المفيد</h3>
+                <p>تحويل رواد الأعمال إلى خبراء التجارة الإلكترونية</p>
+            </div>
+            <div class="footer-links">
+                <a href="https://github.com/bif26/lmofidclub" target="_blank">📱 GitHub</a>
+                <a href="README.md">📖 اقرأ المزيد</a>
+                <a href="#top">⬆️ إلى الأعلى</a>
+            </div>
+            <div class="footer-credits">
+                <p>💡 تم إنشاؤه بواسطة <strong>سيمو لايف</strong> و <strong>أنس</strong></p>
+                <p>© 2024 Lmofid Club. جميع الحقوق محفوظة.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Category mapping
+        const categoryMap = {
+            1: 'mindset', 2: 'mindset', 3: 'mindset', 4: 'mindset', 5: 'mindset',
+            6: 'mindset', 7: 'mindset', 8: 'mindset', 9: 'mindset', 10: 'mindset',
+            11: 'mindset', 12: 'mindset', 13: 'mindset', 14: 'mindset', 15: 'mindset',
+            16: 'mindset', 17: 'mindset', 18: 'basics', 19: 'basics', 20: 'basics',
+            21: 'basics', 22: 'basics', 23: 'basics', 24: 'basics', 25: 'basics',
+            26: 'store', 27: 'store', 28: 'store', 29: 'store', 30: 'store',
+            31: 'store', 32: 'store', 33: 'store', 34: 'store', 35: 'store',
+            36: 'store', 37: 'store', 38: 'store', 39: 'store', 40: 'store',
+            41: 'store', 42: 'store', 43: 'store', 44: 'store', 45: 'store',
+            46: 'store', 47: 'store', 48: 'store', 49: 'store', 50: 'store',
+            51: 'products', 52: 'products', 53: 'products', 54: 'products', 55: 'products',
+            56: 'products', 57: 'products', 58: 'products', 59: 'products', 60: 'products',
+            61: 'products', 62: 'products', 63: 'products', 64: 'products', 65: 'products',
+            66: 'products', 67: 'products', 68: 'products', 69: 'products', 70: 'products',
+        };
+
+        let allLessons = [];
+        let filteredLessons = [];
+        let currentCategory = 'all';
+        let currentSort = 'number-asc';
+
+        // Fetch lessons from JSON
+        async function fetchLessons() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/bif26/lmofidclub/main/lmofidclub_links.json');
+                if (!response.ok) throw new Error('Failed to fetch lessons');
+                allLessons = await response.json();
+                
+                // Add category to each lesson
+                allLessons = allLessons.map((lesson, index) => ({
+                    ...lesson,
+                    number: index + 1,
+                    category: getCategoryForLesson(index + 1)
+                }));
+
+                filteredLessons = allLessons;
+                renderLessons();
+                setupEventListeners();
+            } catch (error) {
+                console.error('Error fetching lessons:', error);
+                document.getElementById('lessonsContainer').innerHTML = `
+                    <div class="empty-state">
+                        <h3>⚠️ حدث خطأ</h3>
+                        <p>لم نتمكن من تحميل الدروس. يرجى التحقق من الاتصال بالإنترنت.</p>
+                    </div>
+                `;
+            }
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
 
-    // Call the function to fetch and display links
-    fetchAndDisplayLinks();
-  </script>
+        // Get category for lesson number
+        function getCategoryForLesson(number) {
+            if (number >= 1 && number <= 17) return 'mindset';
+            if (number >= 18 && number <= 25) return 'basics';
+            if (number >= 26 && number <= 50) return 'store';
+            if (number >= 51 && number <= 70) return 'products';
+            if (number >= 71 && number <= 81) return 'business';
+            if (number >= 82 && number <= 175) return 'facebook';
+            if (number >= 115 && number <= 125) return 'social';
+            if (number >= 136 && number <= 146) return 'scaling';
+            if (number >= 147 && number <= 173) return 'advanced';
+            if (number >= 174 && number <= 188) return 'technical';
+            if (number >= 189 && number <= 200) return 'platforms';
+            return 'other';
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Category buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    currentCategory = this.dataset.category;
+                    applyFilters();
+                });
+            });
+
+            // Search input
+            document.getElementById('searchInput').addEventListener('input', function() {
+                applyFilters();
+            });
+
+            // Sort select
+            document.getElementById('sortSelect').addEventListener('change', function() {
+                currentSort = this.value;
+                applyFilters();
+            });
+        }
+
+        // Apply filters and sorting
+        function applyFilters() {
+            let filtered = allLessons;
+
+            // Filter by category
+            if (currentCategory !== 'all') {
+                filtered = filtered.filter(lesson => lesson.category === currentCategory);
+            }
+
+            // Filter by search
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm) {
+                filtered = filtered.filter(lesson => 
+                    lesson.title.toLowerCase().includes(searchTerm) ||
+                    lesson.number.toString().includes(searchTerm)
+                );
+            }
+
+            // Sort
+            filtered.sort((a, b) => {
+                switch(currentSort) {
+                    case 'number-desc':
+                        return b.number - a.number;
+                    case 'title':
+                        return a.title.localeCompare(b.title);
+                    default: // number-asc
+                        return a.number - b.number;
+                }
+            });
+
+            filteredLessons = filtered;
+            renderLessons();
+        }
+
+        // Render lessons
+        function renderLessons() {
+            const container = document.getElementById('lessonsContainer');
+
+            if (filteredLessons.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <h3>🔍 لم يتم العثور على دروس</h3>
+                        <p>حاول تغيير معايير البحث أو الفئة</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filteredLessons.map(lesson => `
+                <div class="lesson-card">
+                    <div class="lesson-number">الدرس #${lesson.number}</div>
+                    <div class="lesson-content">
+                        <span class="lesson-category">${getCategoryLabel(lesson.category)}</span>
+                        <h3 class="lesson-title">${lesson.title}</h3>
+                        <a href="${lesson.url}" target="_blank" class="lesson-watch">
+                            ▶️ شاهد الدرس
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get category label
+        function getCategoryLabel(category) {
+            const labels = {
+                'mindset': '🧠 الذهنية',
+                'basics': '📚 الأساسيات',
+                'store': '🏪 المتجر',
+                'products': '📦 المنتجات',
+                'business': '💼 الأعمال',
+                'facebook': '📘 فيسبوك',
+                'social': '📱 وسائل التواصل',
+                'scaling': '📈 التوسع',
+                'advanced': '⚙️ متقدم',
+                'technical': '🔧 تقني',
+                'platforms': '🌐 منصات',
+                'other': '📖 أخرى'
+            };
+            return labels[category] || category;
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', fetchLessons);
+
+        // Smooth scroll to top
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('a[href="#top"]')) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    </script>
 </body>
 </html>
